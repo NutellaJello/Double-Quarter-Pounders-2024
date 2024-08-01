@@ -1,3 +1,13 @@
+To check the code, click on TeamCode -> src/main -> java/org/firstinspires/ftc/teamcode 
+
+
+
+
+
+
+
+
+
 ## NOTICE
 
 This repository contains the public FTC SDK for the CENTERSTAGE (2023-2024) competition season.
