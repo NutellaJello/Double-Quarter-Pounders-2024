@@ -49,7 +49,6 @@ public class fieldCentric extends LinearOpMode {
         boolean slowMode = false;
 
         while (opModeIsActive()) {
-            telemetry.addData("stickdrift-y", Double.toString(gamepad2.left_stick_y));
 
 
             double y = Range.clip(gamepad1.left_stick_y, -1, 1);
@@ -90,6 +89,7 @@ public class fieldCentric extends LinearOpMode {
             motorBackRight.setPower(brPower);
 
 
+            telemetry.addData("yaw",imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES) );
 
 
             telemetry.update();
