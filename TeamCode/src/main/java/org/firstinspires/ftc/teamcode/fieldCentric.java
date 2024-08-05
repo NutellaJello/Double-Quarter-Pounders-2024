@@ -61,7 +61,7 @@ public class fieldCentric extends LinearOpMode {
 
             double rot = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
 
-            //only goes forward when u press a on
+            //only goes forward when you press a on
 
             if(gamepad1.a){
                 motorFrontLeft.setPower(-Math.sin(rot-45));
