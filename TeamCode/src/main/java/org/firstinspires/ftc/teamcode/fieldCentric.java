@@ -61,15 +61,23 @@ public class fieldCentric extends LinearOpMode {
 
             double rot = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
 
+            //magnitude of joysticky
+            double mag = Math.sqrt(x*x+y*y);
+
+            //angle of joysticky
+            double ang = Math.toDegrees(Math.atan2(x, y));
+
+            //combined the joystick and robo angle
+
+            double goob = rot-ang;
             //only goes forward when you press a on
 
             if(gamepad1.a){
-                motorFrontLeft.setPower(-Math.sin(rot-45));
-                motorBackRight.setPower(-Math.sin(rot-45));
+                motorFrontLeft.setPower(-Math.sin(goob-45));
+                motorBackRight.setPower(-Math.sin(goob-45));
 
-                motorFrontRight.setPower(Math.sin(rot+45));
-                motorBackLeft.setPower(Math.sin(rot+45));
-
+                motorFrontRight.setPower(Math.sin(goob+45));
+                motorBackLeft.setPower(Math.sin(goob+45));
 
             }
 
