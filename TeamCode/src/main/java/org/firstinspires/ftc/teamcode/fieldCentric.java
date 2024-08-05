@@ -35,7 +35,7 @@ public class fieldCentric extends LinearOpMode {
 
         IMU imu         = null;
         RevHubOrientationOnRobot.LogoFacingDirection logoDirection = RevHubOrientationOnRobot.LogoFacingDirection.UP;
-        RevHubOrientationOnRobot.UsbFacingDirection  usbDirection  = RevHubOrientationOnRobot.UsbFacingDirection.LEFT;
+        RevHubOrientationOnRobot.UsbFacingDirection  usbDirection  = RevHubOrientationOnRobot.UsbFacingDirection.RIGHT;
         RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(logoDirection, usbDirection);
 
         imu = hardwareMap.get(IMU.class, "imu");
@@ -49,7 +49,6 @@ public class fieldCentric extends LinearOpMode {
         boolean slowMode = false;
 
         while (opModeIsActive()) {
-//
             telemetry.addData("stickdrift-y", Double.toString(gamepad2.left_stick_y));
 
 
