@@ -77,11 +77,12 @@ public class fieldCentric extends LinearOpMode {
             double blPower = mag*(Math.sin(goob+45))+ 0.5*rx;
             double brPower = mag*(-Math.sin(goob-45)) -0.5*rx;
 
+            /*
             flPower/= maxPower;
             frPower/= maxPower;
             blPower/= maxPower;
             brPower/= maxPower;
-
+    */
 
             motorFrontLeft.setPower(flPower);
             motorBackLeft.setPower(blPower);
