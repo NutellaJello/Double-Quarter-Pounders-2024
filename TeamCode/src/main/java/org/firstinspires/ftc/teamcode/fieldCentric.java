@@ -67,8 +67,8 @@ public class fieldCentric extends LinearOpMode {
                 motorFrontLeft.setPower(-Math.sin(rot-45));
                 motorBackRight.setPower(-Math.sin(rot-45));
 
-                motorFrontRight.setPower(-Math.sin(rot-45));
-                motorBackLeft.setPower(-Math.sin(rot-45));
+                motorFrontRight.setPower(Math.sin(rot+45));
+                motorBackLeft.setPower(Math.sin(rot+45));
 
 
             }
