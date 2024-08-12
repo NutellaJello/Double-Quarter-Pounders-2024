@@ -200,8 +200,8 @@ public class Autotest extends LinearOpMode {
 //        rightDrive.setDirection(DcMotor.Direction.FORWARD);
 
         // reversing our motors
-        FrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        BackLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        FrontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        BackRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         /* The next two lines define Hub orientation.
          * The Default Orientation (shown) is when a hub is mounted horizontally with the printed logo pointing UP and the USB port pointing FORWARD.
@@ -209,7 +209,7 @@ public class Autotest extends LinearOpMode {
          * To Do:  EDIT these two lines to match YOUR mounting configuration.
          */
         RevHubOrientationOnRobot.LogoFacingDirection logoDirection = RevHubOrientationOnRobot.LogoFacingDirection.UP;
-        RevHubOrientationOnRobot.UsbFacingDirection  usbDirection  = RevHubOrientationOnRobot.UsbFacingDirection.LEFT;
+        RevHubOrientationOnRobot.UsbFacingDirection  usbDirection  = RevHubOrientationOnRobot.UsbFacingDirection.RIGHT;
         RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(logoDirection, usbDirection);
 
         // Now initialize the IMU with this mounting orientation
@@ -223,10 +223,10 @@ public class Autotest extends LinearOpMode {
 //        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 //        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        FrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        FrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        BackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        FrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        FrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        BackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        BackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         FrontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FrontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -268,10 +268,10 @@ public class Autotest extends LinearOpMode {
 //        leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        FrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        FrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        BackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        BackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        FrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        FrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        BackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        BackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         imu.resetYaw();
 
@@ -279,18 +279,39 @@ public class Autotest extends LinearOpMode {
         // Notes:   Reverse movement is obtained by setting a negative distance (not speed)
         //          holdHeading() is used after turns to let the heading stabilize
         //          Add a sleep(2000) after any step to keep the telemetry data visible for review
+        int num_tile = 2;
 
-        driveStraight(DRIVE_SPEED, 10.0, 0.0);    // Drive backwards 24"
-//        sleep (2000);
-//        turnToHeading(TURN_SPEED,90);
-//        sleep(2000);
-//        turnToHeading(TURN_SPEED,0);
-        sleep (2000);
-        driveStraight(DRIVE_SPEED,10,0.0);
+        drive(num_tile);    // Drive forward 2 tile length
+        FrontLeft.setPower(0);
+        FrontRight.setPower(0);
+        BackLeft.setPower(0);
+        BackRight.setPower(0);
+        FrontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FrontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BackLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BackRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        sleep(2000);
+
+        telemetry.addData("Drive 1", "Complete");
+        telemetry.update();
+
+        turn(); // turns 90 degrees counter clockwise
+        FrontLeft.setPower(0);
+        FrontRight.setPower(0);
+        BackLeft.setPower(0);
+        BackRight.setPower(0);
+        FrontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FrontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BackLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BackRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        sleep(2000);
+//
+//        telemetry.addData("Drive 2", "Complete");
+//        telemetry.update();
 
 
 
-        sleep (1000);
+
 
 
         telemetry.addData("Path", "Complete");
@@ -320,6 +341,46 @@ public class Autotest extends LinearOpMode {
      *                   0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
      *                   If a relative angle is required, add/subtract from the current robotHeading.
      */
+    public void drive (long tiles){
+        FrontLeft.setPower(0.5);
+        FrontRight.setPower(0.5);
+        BackLeft.setPower(0.5);
+        BackRight.setPower(0.5);
+
+        sleep (tiles * 806);
+        FrontLeft.setPower(0);
+        FrontRight.setPower(0);
+        BackLeft.setPower(0);
+        BackRight.setPower(0);
+
+        FrontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FrontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BackLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BackRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    public void turn (){
+        while (getHeading() < 90) {
+            FrontLeft.setPower(-0.3);
+            FrontRight.setPower(0.3);
+            BackLeft.setPower(-0.3);
+            BackRight.setPower(0.3);
+            telemetry.addData(">", "Robot Heading = %4.0f", getHeading());
+            telemetry.update();
+            if (getHeading() == 90) {
+                sleep(1000);
+                FrontLeft.setPower(0);
+                FrontRight.setPower(0);
+                BackLeft.setPower(0);
+                BackRight.setPower(0);
+                FrontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                FrontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                BackLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                BackRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            }
+        }
+
+    }
     public void driveStraight(double maxDriveSpeed,
                               double distance,
                               double heading) {
